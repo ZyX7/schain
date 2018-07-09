@@ -1,11 +1,11 @@
-#SChain 
+# SChain 
 
 ## Coin Specs
 
 #
 
 #### Block times: - *1 minute* 
-#### Maximum supply: - *2,500,000 (2 million) SChain*
+#### Maximum supply: - *2,500,000 (2.5 million) SChain*
 #### Consensus mechanism: - *Proof-of-Stake (85% masternodes, 15% stakers)*
 #### Algorithm: - *Quark-hash* 
 #### Masternode collateral - *1,000 SChain*  
