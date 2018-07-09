@@ -1,28 +1,28 @@
-Save Core
+Schain Core
 =====================
 
 Setup
 ---------------------
-[Save Core](http://savebitcoin.io) is the original Save client and it builds the backbone of the network. However, it downloads and stores the entire history of Save transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[Schain Core](http://savebitcoin.io) is the original Schain client and it builds the backbone of the network. However, it downloads and stores the entire history of Schain transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
-The following are some helpful notes on how to run Save on your native platform.
+The following are some helpful notes on how to run Schain on your native platform.
 
 ### Unix
 
 Unpack the files into a directory and run:
 
-- bin/32/save-qt (GUI, 32-bit) or bin/32/saved (headless, 32-bit)
-- bin/64/save-qt (GUI, 64-bit) or bin/64/saved (headless, 64-bit)
+- bin/32/schain-qt (GUI, 32-bit) or bin/32/schaind (headless, 32-bit)
+- bin/64/schain-qt (GUI, 64-bit) or bin/64/schaind (headless, 64-bit)
 
 ### Windows
 
-Unpack the files into a directory, and then run save-qt.exe.
+Unpack the files into a directory, and then run schain-qt.exe.
 
 ### OSX
 
-Drag Save-Qt to your applications folder, and then run Save-Qt.
+Drag Schain-Qt to your applications folder, and then run Schain-Qt.
 
 ### Need Help?
 
@@ -30,7 +30,7 @@ Drag Save-Qt to your applications folder, and then run Save-Qt.
 
 Building
 ---------------------
-The following are developer notes on how to build Save on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build Schain on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [OSX Build Notes](build-osx.md)
 - [Unix Build Notes](build-unix.md)
@@ -38,7 +38,7 @@ The following are developer notes on how to build Save on your native platform. 
 
 Development
 ---------------------
-The Save repo's [root README](https://github.com/save/save/blob/master/README.md) contains relevant information on the development process and automated testing.
+The Schain repo's [root README](https://github.com/schain/schain/blob/master/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Multiwallet Qt Development](multiwallet-qt.md)

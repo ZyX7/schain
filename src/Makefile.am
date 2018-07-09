@@ -72,15 +72,15 @@ bin_PROGRAMS =
 TESTS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += saved
+  bin_PROGRAMS += schaind
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += save-cli save-tx
+  bin_PROGRAMS += schain-cli schain-tx
 endif
 
 .PHONY: FORCE
-# save core #
+# schain core #
 BITCOIN_CORE_H = \
   bignum.h \
   activemasternode.h \
@@ -183,7 +183,7 @@ obj/build.h: FORCE
 	  $(abs_top_srcdir)
 libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between saved and save-qt
+# server: shared between schaind and schain-qt
 libbitcoin_server_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
 libbitcoin_server_a_SOURCES = \
   addrman.cpp \
@@ -228,7 +228,7 @@ libbitcoin_zmq_a_SOURCES = \
   zmq/zmqpublishnotifier.cpp
 endif
 
-# wallet: shared between saved and save-qt, but only linked
+# wallet: shared between schaind and schain-qt, but only linked
 # when wallet enabled
 
 libbitcoin_wallet_a_CFLAGS = -fPIC
@@ -290,7 +290,7 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sph_skein.h \
   crypto/sph_types.h
 
-# common: shared between saved, and save-qt and non-server tools
+# common: shared between schaind, and schain-qt and non-server tools
 libbitcoin_common_a_CPPFLAGS = $(BITCOIN_INCLUDES)
 libbitcoin_common_a_SOURCES = \
   allocators.cpp \
@@ -348,7 +348,7 @@ libbitcoin_util_a_SOURCES += compat/glibc_compat.cpp
 libbitcoin_util_a_SOURCES += compat/glibcxx_compat.cpp
 endif
 
-# cli: shared between save-cli and save-qt
+# cli: shared between schain-cli and schain-qt
 libbitcoin_cli_a_CPPFLAGS = $(BITCOIN_INCLUDES)
 libbitcoin_cli_a_SOURCES = \
   rpcclient.cpp \
@@ -358,7 +358,7 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind binary #
-saved_LDADD = \
+schaind_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_COMMON) \
   $(LIBUNIVALUE) \
@@ -369,26 +369,26 @@ saved_LDADD = \
   $(LIBSECP256K1)
 
 if ENABLE_ZMQ
-saved_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+schaind_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 endif
 
 if ENABLE_WALLET
-saved_LDADD += libbitcoin_wallet.a
+schaind_LDADD += libbitcoin_wallet.a
 endif
-saved_SOURCES = saved.cpp
+schaind_SOURCES = schaind.cpp
 #
 
 if TARGET_WINDOWS
-saved_SOURCES += saved-res.rc
+schaind_SOURCES += schaind-res.rc
 endif
 
-saved_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
-saved_CPPFLAGS = $(BITCOIN_INCLUDES)
-saved_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+schaind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+schaind_CPPFLAGS = $(BITCOIN_INCLUDES)
+schaind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 
-# save-cli binary #
-save_cli_LDADD = \
+# schain-cli binary #
+schain_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
@@ -397,14 +397,14 @@ save_cli_LDADD = \
   $(CRYPTO_LIBS) \
   $(EVENT_LIBS)
 
-save_cli_SOURCES = \
-  save-cli.cpp
+schain_cli_SOURCES = \
+  schain-cli.cpp
 
-save_cli_CPPFLAGS = $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+schain_cli_CPPFLAGS = $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
 #
 
-# save-tx binary #
-save_tx_LDADD = \
+# schain-tx binary #
+schain_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -413,15 +413,15 @@ save_tx_LDADD = \
   $(BOOST_LIBS) \
   $(CRYPTO_LIBS)
 
-save_tx_SOURCES = save-tx.cpp
-save_tx_CPPFLAGS = $(BITCOIN_INCLUDES)
+schain_tx_SOURCES = schain-tx.cpp
+schain_tx_CPPFLAGS = $(BITCOIN_INCLUDES)
 #
-save_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+schain_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-save_cli_SOURCES += save-cli-res.rc
+schain_cli_SOURCES += schain-cli-res.rc
 endif
-save_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+schain_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if BUILD_BITCOIN_LIBS
 include_HEADERS = script/bitcoinconsensus.h

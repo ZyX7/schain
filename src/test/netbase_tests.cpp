@@ -62,15 +62,15 @@ BOOST_AUTO_TEST_CASE(netbase_splithost)
     BOOST_CHECK(TestSplitHost("www.bitcoin.org:80", "www.bitcoin.org", 80));
     BOOST_CHECK(TestSplitHost("[www.bitcoin.org]:80", "www.bitcoin.org", 80));
     BOOST_CHECK(TestSplitHost("127.0.0.1", "127.0.0.1", -1));
-    BOOST_CHECK(TestSplitHost("127.0.0.1:8821", "127.0.0.1", 8821));
+    BOOST_CHECK(TestSplitHost("127.0.0.1:10021", "127.0.0.1", 10021));
     BOOST_CHECK(TestSplitHost("[127.0.0.1]", "127.0.0.1", -1));
-    BOOST_CHECK(TestSplitHost("[127.0.0.1]:8821", "127.0.0.1", 8821));
+    BOOST_CHECK(TestSplitHost("[127.0.0.1]:10021", "127.0.0.1", 10021));
     BOOST_CHECK(TestSplitHost("::ffff:127.0.0.1", "::ffff:127.0.0.1", -1));
-    BOOST_CHECK(TestSplitHost("[::ffff:127.0.0.1]:8821", "::ffff:127.0.0.1", 8821));
-    BOOST_CHECK(TestSplitHost("[::]:8821", "::", 8821));
-    BOOST_CHECK(TestSplitHost("::8821", "::8821", -1));
-    BOOST_CHECK(TestSplitHost(":8821", "", 8821));
-    BOOST_CHECK(TestSplitHost("[]:8821", "", 8821));
+    BOOST_CHECK(TestSplitHost("[::ffff:127.0.0.1]:10021", "::ffff:127.0.0.1", 10021));
+    BOOST_CHECK(TestSplitHost("[::]:10021", "::", 10021));
+    BOOST_CHECK(TestSplitHost("::10021", "::10021", -1));
+    BOOST_CHECK(TestSplitHost(":10021", "", 10021));
+    BOOST_CHECK(TestSplitHost("[]:10021", "", 10021));
     BOOST_CHECK(TestSplitHost("", "", -1));
 }
 
@@ -85,10 +85,10 @@ bool static TestParse(string src, string canon)
 BOOST_AUTO_TEST_CASE(netbase_lookupnumeric)
 {
     BOOST_CHECK(TestParse("127.0.0.1", "127.0.0.1:65535"));
-    BOOST_CHECK(TestParse("127.0.0.1:8821", "127.0.0.1:8821"));
+    BOOST_CHECK(TestParse("127.0.0.1:10021", "127.0.0.1:10021"));
     BOOST_CHECK(TestParse("::ffff:127.0.0.1", "127.0.0.1:65535"));
     BOOST_CHECK(TestParse("::", "[::]:65535"));
-    BOOST_CHECK(TestParse("[::]:8821", "[::]:8821"));
+    BOOST_CHECK(TestParse("[::]:10021", "[::]:10021"));
     BOOST_CHECK(TestParse("[127.0.0.1]", "127.0.0.1:65535"));
     BOOST_CHECK(TestParse(":::", ""));
 }

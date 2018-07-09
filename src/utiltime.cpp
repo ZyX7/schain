@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/save-config.h"
+#include "config/schain-config.h"
 #endif
 
 #include "tinyformat.h"

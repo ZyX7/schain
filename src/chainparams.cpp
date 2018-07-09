@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017 The Saved developers
+// Copyright (c) 2017 The Schaind developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -107,14 +107,14 @@ public:
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;
         nTargetTimespan = 2 * 60; 
-        nTargetSpacing = 2 * 60;  // Saved: 1 minute blocks
+        nTargetSpacing = 2 * 60;  // Schaind: 1 minute blocks
         nMaturity = 5; // 6 block maturity (+1 elsewhere)
         nMasternodeCountDrift = 20;
         nMaxMoneyOut = 2500000 * COIN; // 5 mil max supply
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 200;
-        nModifierUpdateBlock = 1; // we use the version 2 for NORT
+        nModifierUpdateBlock = 1; // we use the version 2 for SCHAIN
 
         /*
         node genesis.js -a quark -t 1531166400 -z "Schain is on LIVE! - ZyX7 7/9/2018" -v 0 -n 21561600 -p "04f5a8143f86ad8ac63791fbbdb8e0b91a8da88c8c693a95f6c2c13c063ea790f7960b8025a9047a7bc671d5cfe707a2dd2e13b86182e1064a0eea7bf863636363"
@@ -144,17 +144,17 @@ public:
         //vSeeds.push_back(CDNSSeedData("", ""));
  
 
-        // Saved addresses start with 'N'
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 125);
-        // Saved script addresses start with '3'
+        // Schaind addresses start with 'S'
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 63);
+        // Schaind script addresses start with '3'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 6);
-        // Saved private keys start with 'K'
+        // Schaind private keys start with 'K'
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 46);
-        // Saved BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
+        // Schaind BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
-        // Saved BIP32 prvkeys start with 'xprv' (Bitcoin defaults)
+        // Schaind BIP32 prvkeys start with 'xprv' (Bitcoin defaults)
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
-        // Saved BIP44 coin type is '222' (0x800000de)
+        // Schaind BIP44 coin type is '222' (0x800000de)
         // BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0xde).convert_to_container<std::vector<unsigned char> >();
 
@@ -204,8 +204,8 @@ public:
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // Saved: 1 day
-        nTargetSpacing = 2 * 60;  // Saved: 1 minute
+        nTargetTimespan = 1 * 60; // Schaind: 1 day
+        nTargetSpacing = 2 * 60;  // Schaind: 1 minute
         nLastPOWBlock = 200;
         nMaturity = 15;
         nMasternodeCountDrift = 4;
@@ -222,17 +222,17 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
 
-        // Testnet Saved addresses start with 'g'
+        // Testnet Schaind addresses start with 'g'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 98);
-        // Testnet Saved script addresses start with '5' or '6'
+        // Testnet Schaind script addresses start with '5' or '6'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 12);
         // Testnet private keys start with 'k'
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 108);
-        // Testnet Saved BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
+        // Testnet Schaind BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
-        // Testnet Saved BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
+        // Testnet Schaind BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
-        // Testnet saved BIP44 coin type is '1' (All coin's testnet default)
+        // Testnet schaind BIP44 coin type is '1' (All coin's testnet default)
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_test, ARRAYLEN(pnSeed6_test));
@@ -278,8 +278,8 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 1;
-        nTargetTimespan = 24 * 60 * 60; // Saved: 1 day
-        nTargetSpacing = 2 * 60;        // Saved: 1 minutes
+        nTargetTimespan = 24 * 60 * 60; // Schaind: 1 day
+        nTargetSpacing = 2 * 60;        // Schaind: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         genesis.nTime = 1516926684;
         genesis.nBits = 0x207fffff;

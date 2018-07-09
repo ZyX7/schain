@@ -1,0 +1,29 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/schain_bg.qm</file>
+        <file alias="ca">locale/schain_ca.qm</file>
+        <file alias="cs">locale/schain_cs.qm</file>
+        <file alias="da">locale/schain_da.qm</file>
+        <file alias="de">locale/schain_de.qm</file>
+        <file alias="en">locale/schain_en.qm</file>
+        <file alias="en_US">locale/schain_en_US.qm</file>
+        <file alias="es">locale/schain_es.qm</file>
+        <file alias="fi">locale/schain_fi.qm</file>
+        <file alias="fr_FR">locale/schain_fr_FR.qm</file>
+        <file alias="it">locale/schain_it.qm</file>
+        <file alias="ja">locale/schain_ja.qm</file>
+        <file alias="ko_KR">locale/schain_ko_KR.qm</file>
+        <file alias="nl">locale/schain_nl.qm</file>
+        <file alias="pl">locale/schain_pl.qm</file>
+        <file alias="pt">locale/schain_pt.qm</file>
+        <file alias="pt_BR">locale/schain_pt_BR.qm</file>
+        <file alias="ro_RO">locale/schain_ro_RO.qm</file>
+        <file alias="ru">locale/schain_ru.qm</file>
+        <file alias="sk">locale/schain_sk.qm</file>
+        <file alias="sv">locale/schain_sv.qm</file>
+        <file alias="tr">locale/schain_tr.qm</file>
+        <file alias="uk">locale/schain_uk.qm</file>
+        <file alias="zh_CN">locale/schain_zh_CN.qm</file>
+        <file alias="zh_TW">locale/schain_zh_TW.qm</file>
+    </qresource>
+</RCC>

@@ -1,10 +1,10 @@
 Sample configuration files for:
 
-SystemD: saved.service
-Upstart: saved.conf
-OpenRC:  saved.openrc
-         saved.openrcconf
-CentOS:  saved.init
+SystemD: schaind.service
+Upstart: schaind.conf
+OpenRC:  schaind.openrc
+         schaind.openrcconf
+CentOS:  schaind.init
 
 have been made available to assist packagers in creating node packages here.
 

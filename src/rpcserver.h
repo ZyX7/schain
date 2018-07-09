@@ -96,7 +96,7 @@ public:
 };
 
 /**
- * Save RPC command dispatcher.
+ * Schain RPC command dispatcher.
  */
 class CRPCTable
 {

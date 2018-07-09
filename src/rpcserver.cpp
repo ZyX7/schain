@@ -242,10 +242,10 @@ UniValue stop(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "\nStop Save server.");
+            "\nStop Schain server.");
     // Shutdown will take long enough that the response should get back
     StartShutdown();
-    return "Save server stopping";
+    return "Schain server stopping";
 }
 
 
@@ -327,33 +327,33 @@ static const CRPCCommand vRPCCommands[] =
         {"hidden", "reconsiderblock", &reconsiderblock, true, true, false},
         {"hidden", "setmocktime", &setmocktime, true, false, false},
 
-        /* Save features */
-        {"save", "masternode", &masternode, true, true, false},
-        {"save", "listmasternodes", &listmasternodes, true, true, false},
-        {"save", "getmasternodecount", &getmasternodecount, true, true, false},
-        {"save", "masternodeconnect", &masternodeconnect, true, true, false},
-        {"save", "masternodecurrent", &masternodecurrent, true, true, false},
-        {"save", "masternodedebug", &masternodedebug, true, true, false},
-        {"save", "startmasternode", &startmasternode, true, true, false},
-        {"save", "createmasternodekey", &createmasternodekey, true, true, false},
-        {"save", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
-        {"save", "listmasternodeconf", &listmasternodeconf, true, true, false},
-        {"save", "getmasternodestatus", &getmasternodestatus, true, true, false},
-        {"save", "getmasternodewinners", &getmasternodewinners, true, true, false},
-        {"save", "getmasternodescores", &getmasternodescores, true, true, false},
-        {"save", "mnbudget", &mnbudget, true, true, false},
-        {"save", "preparebudget", &preparebudget, true, true, false},
-        {"save", "submitbudget", &submitbudget, true, true, false},
-        {"save", "mnbudgetvote", &mnbudgetvote, true, true, false},
-        {"save", "getbudgetvotes", &getbudgetvotes, true, true, false},
-        {"save", "getnextsuperblock", &getnextsuperblock, true, true, false},
-        {"save", "getbudgetprojection", &getbudgetprojection, true, true, false},
-        {"save", "getbudgetinfo", &getbudgetinfo, true, true, false},
-        {"save", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
-        {"save", "mnfinalbudget", &mnfinalbudget, true, true, false},
-        {"save", "checkbudgets", &checkbudgets, true, true, false},
-        {"save", "mnsync", &mnsync, true, true, false},
-        {"save", "spork", &spork, true, true, false},
+        /* Schain features */
+        {"schain", "masternode", &masternode, true, true, false},
+        {"schain", "listmasternodes", &listmasternodes, true, true, false},
+        {"schain", "getmasternodecount", &getmasternodecount, true, true, false},
+        {"schain", "masternodeconnect", &masternodeconnect, true, true, false},
+        {"schain", "masternodecurrent", &masternodecurrent, true, true, false},
+        {"schain", "masternodedebug", &masternodedebug, true, true, false},
+        {"schain", "startmasternode", &startmasternode, true, true, false},
+        {"schain", "createmasternodekey", &createmasternodekey, true, true, false},
+        {"schain", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
+        {"schain", "listmasternodeconf", &listmasternodeconf, true, true, false},
+        {"schain", "getmasternodestatus", &getmasternodestatus, true, true, false},
+        {"schain", "getmasternodewinners", &getmasternodewinners, true, true, false},
+        {"schain", "getmasternodescores", &getmasternodescores, true, true, false},
+        {"schain", "mnbudget", &mnbudget, true, true, false},
+        {"schain", "preparebudget", &preparebudget, true, true, false},
+        {"schain", "submitbudget", &submitbudget, true, true, false},
+        {"schain", "mnbudgetvote", &mnbudgetvote, true, true, false},
+        {"schain", "getbudgetvotes", &getbudgetvotes, true, true, false},
+        {"schain", "getnextsuperblock", &getnextsuperblock, true, true, false},
+        {"schain", "getbudgetprojection", &getbudgetprojection, true, true, false},
+        {"schain", "getbudgetinfo", &getbudgetinfo, true, true, false},
+        {"schain", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
+        {"schain", "mnfinalbudget", &mnfinalbudget, true, true, false},
+        {"schain", "checkbudgets", &checkbudgets, true, true, false},
+        {"schain", "mnsync", &mnsync, true, true, false},
+        {"schain", "spork", &spork, true, true, false},
 #ifdef ENABLE_WALLET
 
         /* Wallet */
@@ -1070,7 +1070,7 @@ std::vector<std::string> CRPCTable::listCommands() const
 
 std::string HelpExampleCli(string methodname, string args)
 {
-    return "> save-cli " + methodname + " " + args + "\n";
+    return "> schain-cli " + methodname + " " + args + "\n";
 }
 
 std::string HelpExampleRpc(string methodname, string args)

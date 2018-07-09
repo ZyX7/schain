@@ -9,8 +9,8 @@
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between save-cli and saved)
- * of a given instance of the Save system.
+ * CBaseChainParams defines the base parameters (shared between schain-cli and schaind)
+ * of a given instance of the Schain system.
  */
 class CBaseChainParams
 {

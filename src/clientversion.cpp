@@ -10,10 +10,10 @@
 
 /**
  * Name of client reported in the 'version' message. Report the same name
- * for both saved and save-qt, to make it harder for attackers to
+ * for both schaind and schain-qt, to make it harder for attackers to
  * target servers or GUI users specifically.
  */
-const std::string CLIENT_NAME("Save Core");
+const std::string CLIENT_NAME("Schain Core");
 
 /**
  * Client version number

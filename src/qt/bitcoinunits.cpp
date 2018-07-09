@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2017 The Save developers
+// Copyright (c) 2017-2017 The Schain developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -20,18 +20,18 @@ BitcoinUnits::BitcoinUnits(QObject* parent) : QAbstractListModel(parent),
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(SV);
-    unitlist.append(mSV);
-    unitlist.append(uSV);
+    unitlist.append(SCH);
+    unitlist.append(mSCH);
+    unitlist.append(uSCH);
     return unitlist;
 }
 
 bool BitcoinUnits::valid(int unit)
 {
     switch (unit) {
-    case SV:
-    case mSV:
-    case uSV:
+    case SCH:
+    case mSCH:
+    case uSCH:
         return true;
     default:
         return false;
@@ -41,12 +41,12 @@ bool BitcoinUnits::valid(int unit)
 QString BitcoinUnits::id(int unit)
 {
     switch (unit) {
-    case SV:
-        return QString("sv");
-    case mSV:
-        return QString("msv");
-    case uSV:
-        return QString::fromUtf8("usv");
+    case SCH:
+        return QString("sch");
+    case mSCH:
+        return QString("msch");
+    case uSCH:
+        return QString::fromUtf8("usch");
     default:
         return QString("???");
     }
@@ -56,23 +56,23 @@ QString BitcoinUnits::name(int unit)
 {
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
-        case SV:
-            return QString("SV");
-        case mSV:
-            return QString("mSV");
-        case uSV:
-            return QString::fromUtf8("μSV");
+        case SCH:
+            return QString("SCH");
+        case mSCH:
+            return QString("mSCH");
+        case uSCH:
+            return QString::fromUtf8("μSCH");
         default:
             return QString("???");
         }
     } else {
         switch (unit) {
-        case SV:
-            return QString("tSV");
-        case mSV:
-            return QString("mtSV");
-        case uSV:
-            return QString::fromUtf8("μtSV");
+        case SCH:
+            return QString("tSCH");
+        case mSCH:
+            return QString("mtSCH");
+        case uSCH:
+            return QString::fromUtf8("μtSCH");
         default:
             return QString("???");
         }
@@ -83,23 +83,23 @@ QString BitcoinUnits::description(int unit)
 {
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
-        case SV:
-            return QString("SV");
-        case mSV:
-            return QString("Milli-SV (1 / 1" THIN_SP_UTF8 "000)");
-        case uSV:
-            return QString("Micro-SV (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+        case SCH:
+            return QString("SCH");
+        case mSCH:
+            return QString("Milli-SCH (1 / 1" THIN_SP_UTF8 "000)");
+        case uSCH:
+            return QString("Micro-SCH (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
         }
     } else {
         switch (unit) {
-        case SV:
-            return QString("TestSVs");
-        case mSV:
-            return QString("Milli-TestSV (1 / 1" THIN_SP_UTF8 "000)");
-        case uSV:
-            return QString("Micro-TestSV (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+        case SCH:
+            return QString("TestSCHs");
+        case mSCH:
+            return QString("Milli-TestSCH (1 / 1" THIN_SP_UTF8 "000)");
+        case uSCH:
+            return QString("Micro-TestSCH (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
         }
@@ -109,11 +109,11 @@ QString BitcoinUnits::description(int unit)
 qint64 BitcoinUnits::factor(int unit)
 {
     switch (unit) {
-    case SV:
+    case SCH:
         return 100000000;
-    case mSV:
+    case mSCH:
         return 100000;
-    case uSV:
+    case uSCH:
         return 100;
     default:
         return 100000000;
@@ -123,11 +123,11 @@ qint64 BitcoinUnits::factor(int unit)
 int BitcoinUnits::decimals(int unit)
 {
     switch (unit) {
-    case SV:
+    case SCH:
         return 8;
-    case mSV:
+    case mSCH:
         return 5;
-    case uSV:
+    case uSCH:
         return 2;
     default:
         return 0;

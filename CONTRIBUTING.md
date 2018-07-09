@@ -1,7 +1,7 @@
-Contributing to Save Core
+Contributing to Schain Core
 ==================================
 
-The Save Core project operates an open contributor model where anyone is
+The Schain Core project operates an open contributor model where anyone is
 welcome to contribute towards development in the form of peer review, testing
 and patches. This document explains the practical process and guidelines for
 contributing.
@@ -57,12 +57,12 @@ the pull request affects. Valid areas as:
 
   - *Consensus* for changes to consensus critical code
   - *Docs* for changes to the documentation
-  - *Qt* for changes to save-qt
+  - *Qt* for changes to schain-qt
   - *Minting* for changes to the minting code
   - *Net* or *P2P* for changes to the peer-to-peer network code
   - *RPC/REST* for changes to the RPC or REST APIs
   - *Scripts and tools* for changes to the scripts and tools
-  - *Tests* for changes to the save unit tests or QA tests
+  - *Tests* for changes to the schain unit tests or QA tests
   - *Trivial* should **only** be used for PRs that do not change generated
     executable code. Notably, refactors (change of function arguments and code
     reorganization) and changes in behavior should **not** be marked as trivial.
@@ -103,9 +103,9 @@ before it will be merged. The basic squashing workflow is shown below.
     git checkout your_branch_name
     git rebase -i HEAD~n
     # n is normally the number of commits in the pull
-    # set commits from 'pick' to 'squash', save and quit
+    # set commits from 'pick' to 'squash', schain and quit
     # on the next screen, edit/refine commit messages
-    # save and quit
+    # schain and quit
     git push -f # (force push to GitHub)
 
 If you have problems with squashing (or other workflows with `git`), you can
@@ -157,10 +157,10 @@ where possible keep them short, un-complex and easy to verify.
 "Decision Making" Process
 -------------------------
 
-The following applies to code changes to the Save Core project, and is not to be
-confused with overall Save Network Protocol consensus changes.
+The following applies to code changes to the Schain Core project, and is not to be
+confused with overall Schain Network Protocol consensus changes.
 
-Whether a pull request is merged into Save Core rests with the project merge
+Whether a pull request is merged into Schain Core rests with the project merge
 maintainers and ultimately the project lead.
 
 Maintainers will take into consideration if a patch is in line with the general
@@ -174,7 +174,7 @@ In general, all pull requests must:
   - be well peer reviewed;
   - follow code style guidelines;
 
-Patches that change Save consensus rules are considerably more involved than
+Patches that change Schain consensus rules are considerably more involved than
 normal because they affect the entire ecosystem and so must be preceded by
 extensive discussions and clear detailing. While each case will be different,
 one should be prepared to expend more time and effort than for other kinds of
@@ -214,7 +214,7 @@ higher in terms of discussion and peer review requirements, keeping in mind that
 mistakes could be very costly to the wider community. This includes refactoring
 of consensus critical code.
 
-Where a patch set proposes to change the Save consensus, it must have been
+Where a patch set proposes to change the Schain consensus, it must have been
 discussed extensively on the forums and Slack, be accompanied by a widely
 discussed Proposal and have a generally widely perceived technical consensus of being
 a worthwhile change based on the judgement of the maintainers.
@@ -254,7 +254,7 @@ about:
 Release Policy
 --------------
 
-The project leader is the release manager for each Save Core release.
+The project leader is the release manager for each Schain Core release.
 
 Copyright
 ---------

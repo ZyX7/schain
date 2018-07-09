@@ -17,7 +17,7 @@ osx=true
 SIGNER=
 VERSION=
 commit=false
-url=https://github.com/save/save
+url=https://github.com/schain/schain
 proc=2
 mem=2000
 lxc=true
@@ -31,7 +31,7 @@ commitFiles=true
 read -d '' usage <<- EOF
 Usage: $scriptName [-c|u|v|b|s|B|o|h|j|m|] signer version
 
-Run this script from the directory containing the save, gitian-builder, gitian.sigs, and save-detached-sigs.
+Run this script from the directory containing the schain, gitian-builder, gitian.sigs, and schain-detached-sigs.
 
 Arguments:
 signer          GPG signer to sign each build assert file
@@ -39,7 +39,7 @@ version		Version number, commit, or branch to build. If building a commit or bra
 
 Options:
 -c|--commit	Indicate that the version argument is for a commit or branch
--u|--url	Specify the URL of the repository. Default is https://github.com/save/save
+-u|--url	Specify the URL of the repository. Default is https://github.com/schain/schain
 -v|--verify 	Verify the gitian build
 -b|--build	Do a gitian build
 -s|--sign	Make signed binaries for Windows and Mac OSX
@@ -237,8 +237,8 @@ echo ${COMMIT}
 if [[ $setup = true ]]
 then
     sudo apt-get install ruby apache2 git apt-cacher-ng python-vm-builder qemu-kvm qemu-utils
-    git clone https://github.com/save/gitian.sigs.git
-    git clone https://github.com/save/save-detached-sigs.git
+    git clone https://github.com/schain/gitian.sigs.git
+    git clone https://github.com/schain/schain-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
     pushd ./gitian-builder
     if [[ -n "$USE_LXC" ]]
@@ -252,7 +252,7 @@ then
 fi
 
 # Set up build
-pushd ./save
+pushd ./schain
 git fetch
 git checkout ${COMMIT}
 popd
@@ -261,7 +261,7 @@ popd
 if [[ $build = true ]]
 then
 	# Make output folder
-	mkdir -p ./save-binaries/${VERSION}
+	mkdir -p ./schain-binaries/${VERSION}
 
 	# Build Dependencies
 	echo ""
@@ -271,7 +271,7 @@ then
 	mkdir -p inputs
 	wget -N -P inputs $osslPatchUrl
 	wget -N -P inputs $osslTarUrl
-	make -C ../save/depends download SOURCES_PATH=`pwd`/cache/common
+	make -C ../schain/depends download SOURCES_PATH=`pwd`/cache/common
 
 	# Linux
 	if [[ $linux = true ]]
@@ -279,9 +279,9 @@ then
             echo ""
 	    echo "Compiling ${VERSION} Linux"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit save=${COMMIT} --url save=${url} ../save/contrib/gitian-descriptors/gitian-linux.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../save/contrib/gitian-descriptors/gitian-linux.yml
-	    mv build/out/save-*.tar.gz build/out/src/save-*.tar.gz ../save-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit schain=${COMMIT} --url schain=${url} ../schain/contrib/gitian-descriptors/gitian-linux.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../schain/contrib/gitian-descriptors/gitian-linux.yml
+	    mv build/out/schain-*.tar.gz build/out/src/schain-*.tar.gz ../schain-binaries/${VERSION}
 	fi
 	# Windows
 	if [[ $windows = true ]]
@@ -289,10 +289,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit save=${COMMIT} --url save=${url} ../save/contrib/gitian-descriptors/gitian-win.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../save/contrib/gitian-descriptors/gitian-win.yml
-	    mv build/out/save-*-win-unsigned.tar.gz inputs/save-win-unsigned.tar.gz
-	    mv build/out/save-*.zip build/out/save-*.exe ../save-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit schain=${COMMIT} --url schain=${url} ../schain/contrib/gitian-descriptors/gitian-win.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../schain/contrib/gitian-descriptors/gitian-win.yml
+	    mv build/out/schain-*-win-unsigned.tar.gz inputs/schain-win-unsigned.tar.gz
+	    mv build/out/schain-*.zip build/out/schain-*.exe ../schain-binaries/${VERSION}
 	fi
 	# Mac OSX
 	if [[ $osx = true ]]
@@ -300,10 +300,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit save=${COMMIT} --url save=${url} ../save/contrib/gitian-descriptors/gitian-osx.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../save/contrib/gitian-descriptors/gitian-osx.yml
-	    mv build/out/save-*-osx-unsigned.tar.gz inputs/save-osx-unsigned.tar.gz
-	    mv build/out/save-*.tar.gz build/out/save-*.dmg ../save-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit schain=${COMMIT} --url schain=${url} ../schain/contrib/gitian-descriptors/gitian-osx.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../schain/contrib/gitian-descriptors/gitian-osx.yml
+	    mv build/out/schain-*-osx-unsigned.tar.gz inputs/schain-osx-unsigned.tar.gz
+	    mv build/out/schain-*.tar.gz build/out/schain-*.dmg ../schain-binaries/${VERSION}
 	fi
 	# AArch64
 	if [[ $aarch64 = true ]]
@@ -311,9 +311,9 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} AArch64"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit save=${COMMIT} --url save=${url} ../save/contrib/gitian-descriptors/gitian-aarch64.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-aarch64 --destination ../gitian.sigs/ ../save/contrib/gitian-descriptors/gitian-aarch64.yml
-	    mv build/out/save-*.tar.gz build/out/src/save-*.tar.gz ../save-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit schain=${COMMIT} --url schain=${url} ../schain/contrib/gitian-descriptors/gitian-aarch64.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-aarch64 --destination ../gitian.sigs/ ../schain/contrib/gitian-descriptors/gitian-aarch64.yml
+	    mv build/out/schain-*.tar.gz build/out/src/schain-*.tar.gz ../schain-binaries/${VERSION}
 	popd
 
         if [[ $commitFiles = true ]]
@@ -340,32 +340,32 @@ then
 	echo ""
 	echo "Verifying v${VERSION} Linux"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../save/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../schain/contrib/gitian-descriptors/gitian-linux.yml
 	# Windows
 	echo ""
 	echo "Verifying v${VERSION} Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../save/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../schain/contrib/gitian-descriptors/gitian-win.yml
 	# Mac OSX
 	echo ""
 	echo "Verifying v${VERSION} Mac OSX"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../save/contrib/gitian-descriptors/gitian-osx.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../schain/contrib/gitian-descriptors/gitian-osx.yml
 	# AArch64
 	echo ""
 	echo "Verifying v${VERSION} AArch64"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-aarch64 ../save/contrib/gitian-descriptors/gitian-aarch64.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-aarch64 ../schain/contrib/gitian-descriptors/gitian-aarch64.yml
 	# Signed Windows
 	echo ""
 	echo "Verifying v${VERSION} Signed Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../save/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../schain/contrib/gitian-descriptors/gitian-osx-signer.yml
 	# Signed Mac OSX
 	echo ""
 	echo "Verifying v${VERSION} Signed Mac OSX"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../save/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../schain/contrib/gitian-descriptors/gitian-osx-signer.yml
 	popd
 fi
 
@@ -380,10 +380,10 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../save/contrib/gitian-descriptors/gitian-win-signer.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../save/contrib/gitian-descriptors/gitian-win-signer.yml
-	    mv build/out/save-*win64-setup.exe ../save-binaries/${VERSION}
-	    mv build/out/save-*win32-setup.exe ../save-binaries/${VERSION}
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../schain/contrib/gitian-descriptors/gitian-win-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../schain/contrib/gitian-descriptors/gitian-win-signer.yml
+	    mv build/out/schain-*win64-setup.exe ../schain-binaries/${VERSION}
+	    mv build/out/schain-*win32-setup.exe ../schain-binaries/${VERSION}
 	fi
 	# Sign Mac OSX
 	if [[ $osx = true ]]
@@ -391,9 +391,9 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../save/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../save/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    mv build/out/save-osx-signed.dmg ../save-binaries/${VERSION}/save-${VERSION}-osx.dmg
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../schain/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../schain/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    mv build/out/schain-osx-signed.dmg ../schain-binaries/${VERSION}/schain-${VERSION}-osx.dmg
 	fi
 	popd
 

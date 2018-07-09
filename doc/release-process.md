@@ -3,7 +3,7 @@ Release Process
 
 Before every release candidate:
 
-* Update translations see [translation_process.md](https://github.com/save/save/blob/master/doc/translation_process.md#synchronising-translations).
+* Update translations see [translation_process.md](https://github.com/schain/schain/blob/master/doc/translation_process.md#synchronising-translations).
 
 Before every minor and major release:
 
@@ -24,12 +24,12 @@ If you're using the automated script (found in [contrib/gitian-build.sh](/contri
 Check out the source code in the following directory hierarchy.
 
     cd /path/to/your/toplevel/build
-    git clone https://github.com/save/gitian.sigs.git
-    git clone https://github.com/save/save-detached-sigs.git
+    git clone https://github.com/schain/gitian.sigs.git
+    git clone https://github.com/schain/schain-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
-    git clone https://github.com/save/save.git
+    git clone https://github.com/schain/schain.git
 
-### Save maintainers/release engineers, suggestion for writing release notes
+### Schain maintainers/release engineers, suggestion for writing release notes
 
 Write release notes. git shortlog helps a lot, for example:
 
@@ -50,7 +50,7 @@ If you're using the automated script (found in [contrib/gitian-build.sh](/contri
 
 Setup Gitian descriptors:
 
-    pushd ./save
+    pushd ./schain
     export SIGNER=(your Gitian key, ie bluematt, sipa, etc)
     export VERSION=(new version, e.g. 0.8.0)
     git fetch
@@ -84,7 +84,7 @@ Create the OS X SDK tarball, see the [OS X readme](README_osx.md) for details, a
 By default, Gitian will fetch source files as needed. To cache them ahead of time:
 
     pushd ./gitian-builder
-    make -C ../save/depends download SOURCES_PATH=`pwd`/cache/common
+    make -C ../schain/depends download SOURCES_PATH=`pwd`/cache/common
     popd
 
 Only missing files will be fetched, so this is safe to re-run for each build.
@@ -92,55 +92,55 @@ Only missing files will be fetched, so this is safe to re-run for each build.
 NOTE: Offline builds must use the --url flag to ensure Gitian fetches only from local URLs. For example:
 
     pushd ./gitian-builder
-    ./bin/gbuild --url save=/path/to/save,signature=/path/to/sigs {rest of arguments}
+    ./bin/gbuild --url schain=/path/to/schain,signature=/path/to/sigs {rest of arguments}
     popd
 
 The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
-### Build and sign Save Core for Linux, Windows, and OS X:
+### Build and sign Schain Core for Linux, Windows, and OS X:
 
     pushd ./gitian-builder
-    ./bin/gbuild --memory 3000 --commit save=v${VERSION} ../save/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../save/contrib/gitian-descriptors/gitian-linux.yml
-    mv build/out/save-*.tar.gz build/out/src/save-*.tar.gz ../
+    ./bin/gbuild --memory 3000 --commit schain=v${VERSION} ../schain/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../schain/contrib/gitian-descriptors/gitian-linux.yml
+    mv build/out/schain-*.tar.gz build/out/src/schain-*.tar.gz ../
 
-    ./bin/gbuild --memory 3000 --commit save=v${VERSION} ../save/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../save/contrib/gitian-descriptors/gitian-win.yml
-    mv build/out/save-*-win-unsigned.tar.gz inputs/save-win-unsigned.tar.gz
-    mv build/out/save-*.zip build/out/save-*.exe ../
+    ./bin/gbuild --memory 3000 --commit schain=v${VERSION} ../schain/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../schain/contrib/gitian-descriptors/gitian-win.yml
+    mv build/out/schain-*-win-unsigned.tar.gz inputs/schain-win-unsigned.tar.gz
+    mv build/out/schain-*.zip build/out/schain-*.exe ../
 
-    ./bin/gbuild --memory 3000 --commit save=v${VERSION} ../save/contrib/gitian-descriptors/gitian-osx.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../save/contrib/gitian-descriptors/gitian-osx.yml
-    mv build/out/save-*-osx-unsigned.tar.gz inputs/save-osx-unsigned.tar.gz
-    mv build/out/save-*.tar.gz build/out/save-*.dmg ../
+    ./bin/gbuild --memory 3000 --commit schain=v${VERSION} ../schain/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../schain/contrib/gitian-descriptors/gitian-osx.yml
+    mv build/out/schain-*-osx-unsigned.tar.gz inputs/schain-osx-unsigned.tar.gz
+    mv build/out/schain-*.tar.gz build/out/schain-*.dmg ../
 
-    ./bin/gbuild --memory 3000 --commit save=v${VERSION} ../save/contrib/gitian-descriptors/gitian-aarch64.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../save/contrib/gitian-descriptors/gitian-aarch64.yml
-    mv build/out/save-*.tar.gz build/out/src/save-*.tar.gz ../
+    ./bin/gbuild --memory 3000 --commit schain=v${VERSION} ../schain/contrib/gitian-descriptors/gitian-aarch64.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../schain/contrib/gitian-descriptors/gitian-aarch64.yml
+    mv build/out/schain-*.tar.gz build/out/src/schain-*.tar.gz ../
     popd
 
 Build output expected:
 
-  1. source tarball (`save-${VERSION}.tar.gz`)
-  2. linux 32-bit and 64-bit dist tarballs (`save-${VERSION}-linux[32|64].tar.gz`)
-  3. windows 32-bit and 64-bit unsigned installers and dist zips (`save-${VERSION}-win[32|64]-setup-unsigned.exe`, `save-${VERSION}-win[32|64].zip`)
-  4. OS X unsigned installer and dist tarball (`save-${VERSION}-osx-unsigned.dmg`, `save-${VERSION}-osx64.tar.gz`)
+  1. source tarball (`schain-${VERSION}.tar.gz`)
+  2. linux 32-bit and 64-bit dist tarballs (`schain-${VERSION}-linux[32|64].tar.gz`)
+  3. windows 32-bit and 64-bit unsigned installers and dist zips (`schain-${VERSION}-win[32|64]-setup-unsigned.exe`, `schain-${VERSION}-win[32|64].zip`)
+  4. OS X unsigned installer and dist tarball (`schain-${VERSION}-osx-unsigned.dmg`, `schain-${VERSION}-osx64.tar.gz`)
   5. Gitian signatures (in `gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
 
 ### Verify other gitian builders signatures to your own. (Optional)
 
 Add other gitian builders keys to your gpg keyring, and/or refresh keys.
 
-    gpg --import save/contrib/gitian-keys/*.pgp
+    gpg --import schain/contrib/gitian-keys/*.pgp
     gpg --refresh-keys
 
 Verify the signatures
 
     pushd ./gitian-builder
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../save/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../save/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../save/contrib/gitian-descriptors/gitian-osx.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-aarch64 ../save/contrib/gitian-descriptors/gitian-aarch64.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../schain/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../schain/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../schain/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-aarch64 ../schain/contrib/gitian-descriptors/gitian-aarch64.yml
     popd
 
 ### Next steps:
@@ -162,22 +162,22 @@ Codesigner only: Create Windows/OS X detached signatures:
 
 Codesigner only: Sign the osx binary:
 
-    transfer save-osx-unsigned.tar.gz to osx for signing
-    tar xf save-osx-unsigned.tar.gz
+    transfer schain-osx-unsigned.tar.gz to osx for signing
+    tar xf schain-osx-unsigned.tar.gz
     ./detached-sig-create.sh -s "Key ID"
     Enter the keychain password and authorize the signature
     Move signature-osx.tar.gz back to the gitian host
 
 Codesigner only: Sign the windows binaries:
 
-    tar xf save-win-unsigned.tar.gz
+    tar xf schain-win-unsigned.tar.gz
     ./detached-sig-create.sh -key /path/to/codesign.key
     Enter the passphrase for the key when prompted
     signature-win.tar.gz will be created
 
 Codesigner only: Commit the detached codesign payloads:
 
-    cd ~/save-detached-sigs
+    cd ~/schain-detached-sigs
     checkout the appropriate branch for this release series
     rm -rf *
     tar xf signature-osx.tar.gz
@@ -190,25 +190,25 @@ Codesigner only: Commit the detached codesign payloads:
 Non-codesigners: wait for Windows/OS X detached signatures:
 
 - Once the Windows/OS X builds each have 3 matching signatures, they will be signed with their respective release keys.
-- Detached signatures will then be committed to the [save-detached-sigs](https://github.com/save/save-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
+- Detached signatures will then be committed to the [schain-detached-sigs](https://github.com/schain/schain-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
 Create (and optionally verify) the signed OS X binary:
 
     pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../save/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../save/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../save/contrib/gitian-descriptors/gitian-osx-signer.yml
-    mv build/out/save-osx-signed.dmg ../save-${VERSION}-osx.dmg
+    ./bin/gbuild -i --commit signature=v${VERSION} ../schain/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../schain/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../schain/contrib/gitian-descriptors/gitian-osx-signer.yml
+    mv build/out/schain-osx-signed.dmg ../schain-${VERSION}-osx.dmg
     popd
 
 Create (and optionally verify) the signed Windows binaries:
 
     pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../save/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../save/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../save/contrib/gitian-descriptors/gitian-win-signer.yml
-    mv build/out/save-*win64-setup.exe ../save-${VERSION}-win64-setup.exe
-    mv build/out/save-*win32-setup.exe ../save-${VERSION}-win32-setup.exe
+    ./bin/gbuild -i --commit signature=v${VERSION} ../schain/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../schain/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../schain/contrib/gitian-descriptors/gitian-win-signer.yml
+    mv build/out/schain-*win64-setup.exe ../schain-${VERSION}-win64-setup.exe
+    mv build/out/schain-*win32-setup.exe ../schain-${VERSION}-win32-setup.exe
     popd
 
 Commit your signature for the signed OS X/Windows binaries:
@@ -230,17 +230,17 @@ sha256sum * > SHA256SUMS
 
 The list of files should be:
 ```
-save-${VERSION}-aarch64-linux-gnu.tar.gz
-save-${VERSION}-arm-linux-gnueabihf.tar.gz
-save-${VERSION}-i686-pc-linux-gnu.tar.gz
-save-${VERSION}-x86_64-linux-gnu.tar.gz
-save-${VERSION}-osx64.tar.gz
-save-${VERSION}-osx.dmg
-save-${VERSION}.tar.gz
-save-${VERSION}-win32-setup.exe
-save-${VERSION}-win32.zip
-save-${VERSION}-win64-setup.exe
-save-${VERSION}-win64.zip
+schain-${VERSION}-aarch64-linux-gnu.tar.gz
+schain-${VERSION}-arm-linux-gnueabihf.tar.gz
+schain-${VERSION}-i686-pc-linux-gnu.tar.gz
+schain-${VERSION}-x86_64-linux-gnu.tar.gz
+schain-${VERSION}-osx64.tar.gz
+schain-${VERSION}-osx.dmg
+schain-${VERSION}.tar.gz
+schain-${VERSION}-win32-setup.exe
+schain-${VERSION}-win32.zip
+schain-${VERSION}-win64-setup.exe
+schain-${VERSION}-win64.zip
 ```
 The `*-debug*` files generated by the gitian build contain debug symbols
 for troubleshooting by developers. It is assumed that anyone that is interested
@@ -262,10 +262,10 @@ Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spur
 
   - bitcointalk announcement thread
 
-  - Optionally twitter, reddit /r/Save, ... but this will usually sort out itself
+  - Optionally twitter, reddit /r/Schain, ... but this will usually sort out itself
 
   - Archive release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
 
-  - Create a [new GitHub release](https://github.com/save/save/releases/new) with a link to the archived release notes.
+  - Create a [new GitHub release](https://github.com/schain/schain/releases/new) with a link to the archived release notes.
 
   - Celebrate

@@ -1,0 +1,26 @@
+[Unit]
+Description=Schain's distributed currency daemon
+After=network.target
+
+[Service]
+User=schain
+Group=schain
+
+Type=forking
+PIDFile=/var/lib/schaind/schaind.pid
+
+ExecStart=/usr/bin/schaind -daemon -pid=/var/lib/schaind/schaind.pid \
+          -conf=/etc/schain/schain.conf -datadir=/var/lib/schaind
+
+ExecStop=-/usr/bin/schain-cli -conf=/etc/schain/schain.conf \
+         -datadir=/var/lib/schaind stop
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
