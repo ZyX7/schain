@@ -97,7 +97,7 @@ public:
         pchMessageStart[1] = 0xb2;
         pchMessageStart[2] = 0xa4;
         pchMessageStart[3] = 0xb7;
-        vAlertPubKey = ParseHex("0421d6f1551c2367f81c0ecb4d45d088298442887645a314dfcba3039401872473b0200e69d9679a0d7cc307fb9aaaacafb0cebc18050ce7c995fa19c6accc8415");
+        vAlertPubKey = ParseHex("045ad6f1551c2367f81c0ecb4d45d088298442887645a314dfcba3039401872473b0200e69d9679a0d7cc307fb9aaaacafb0cebc18050ce7c995fa19c6accc8415");
         nDefaultPort = 10021;
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         nSubsidyHalvingInterval = 1050000;
@@ -117,11 +117,11 @@ public:
         nModifierUpdateBlock = 1; // we use the version 2 for SCHAIN
 
         /*
-        node genesis.js -a quark -t 1531166400 -z "Schain is on LIVE! - ZyX7 7/9/2018" -v 0 -n 21561600 -p "04f5a8143f86ad8ac63791fbbdb8e0b91a8da88c8c693a95f6c2c13c063ea790f7960b8025a9047a7bc671d5cfe707a2dd2e13b86182e1064a0eea7bf863636363"
+         node genesis.js -a quark -t 1531166400 -z "Schain is on LIVE! A great environment blockchain is here - ZyX7 7/9/2018" -v 0 -n 21561600 -p "04f5a8143f86ad8ac63791fbbdb8e0b91a8da88c8c693a95f6c2c13c063ea790f7960b8025a9047a7bc671d5cfe707a2dd2e13b86182e1064a0eea7bf863636363"
 
          */
 
-        const char* pszTimestamp = "Schain is on LIVE! - ZyX7 7/9/2018";
+        const char* pszTimestamp = "Schain is on LIVE! A great environment blockchain is here - ZyX7 7/9/2018";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -134,11 +134,11 @@ public:
         genesis.nVersion = 1;
         genesis.nTime = 1531166400;
         genesis.nBits = 0x1e0ffff0;
-        genesis.nNonce = 22687999;
+        genesis.nNonce = 23418260;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x0000024f04507ba4edea2612292c337a9661afacbeb5fa16da397e4b932def9f"));
-        assert(genesis.hashMerkleRoot == uint256("0x09b30eef67506b2eedf54a80910b0e786e1d81ef28a1e58380ea5fc4dedeadcc"));
+        assert(hashGenesisBlock == uint256("0x00000c9f1930b0a6fc05d18862c2033dc5a098481ad21ce9e8f5e8bb9a59d807"));
+        assert(genesis.hashMerkleRoot == uint256("0xf06ae070c63d5eeee30d5b4ea17dd12c35035e42fb1f9d3137af51ef0f9d894a"));
 
         // DNS Seeding
         //vSeeds.push_back(CDNSSeedData("", ""));
