@@ -134,11 +134,11 @@ public:
         genesis.nVersion = 1;
         genesis.nTime = 1531166400;
         genesis.nBits = 0x1e0ffff0;
-        genesis.nNonce = 21788172;
+        genesis.nNonce = 22687999;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x000004365467dc5d9ca6a1bf8fa6af073556bd2187b617fbbffde001aec1c151"));
-        assert(genesis.hashMerkleRoot == uint256("0xa653d89a4a15cb8a18b92732c1fdf21a923b7347700b46e23153eba71094bbf1"));
+        assert(hashGenesisBlock == uint256("0x0000024f04507ba4edea2612292c337a9661afacbeb5fa16da397e4b932def9f"));
+        assert(genesis.hashMerkleRoot == uint256("0x09b30eef67506b2eedf54a80910b0e786e1d81ef28a1e58380ea5fc4dedeadcc"));
 
         // DNS Seeding
         //vSeeds.push_back(CDNSSeedData("", ""));
