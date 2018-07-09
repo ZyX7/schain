@@ -93,11 +93,11 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0xd1;
+        pchMessageStart[0] = 0xd2;
         pchMessageStart[1] = 0xb2;
         pchMessageStart[2] = 0xa4;
         pchMessageStart[3] = 0xb7;
-        vAlertPubKey = ParseHex("0431d6f1551c2367f81c0ecb4d45d088298442887645a314dfcba3039401872473b0200e69d9679a0d7cc307fb9aaaacafb0cebc18050ce7c995fa19c6accc8415");
+        vAlertPubKey = ParseHex("0421d6f1551c2367f81c0ecb4d45d088298442887645a314dfcba3039401872473b0200e69d9679a0d7cc307fb9aaaacafb0cebc18050ce7c995fa19c6accc8415");
         nDefaultPort = 10021;
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         nSubsidyHalvingInterval = 1050000;
@@ -107,7 +107,7 @@ public:
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;
         nTargetTimespan = 2 * 60; 
-        nTargetSpacing = 2 * 60;  // Saved: 2 minute blocks
+        nTargetSpacing = 2 * 60;  // Saved: 1 minute blocks
         nMaturity = 5; // 6 block maturity (+1 elsewhere)
         nMasternodeCountDrift = 20;
         nMaxMoneyOut = 2500000 * COIN; // 5 mil max supply
@@ -117,11 +117,11 @@ public:
         nModifierUpdateBlock = 1; // we use the version 2 for NORT
 
         /*
-         * python ~/genesis.py -a quark-hash -z "Bitcoin now uses as much energy as Ireland - businessgreen 21/05/2018" -t 1526928414 -v 0 -p 04f5a8143f86ad8ac63791fbbdb8e0b91a8da88c8c693a95f6c2c13c063ea790f7960b8025a9047a7bc671d5cfe707a2dd2e13b86182e1064a0eea7bf863636363
+        node genesis.js -a quark -t 1531166400 -z "Schain is on LIVE! - ZyX7 7/9/2018" -v 0 -n 21561600 -p "04f5a8143f86ad8ac63791fbbdb8e0b91a8da88c8c693a95f6c2c13c063ea790f7960b8025a9047a7bc671d5cfe707a2dd2e13b86182e1064a0eea7bf863636363"
 
          */
 
-        const char* pszTimestamp = "Bitcoin now uses as much energy as Ireland - businessgreen 21/05/2018";
+        const char* pszTimestamp = "Schain is on LIVE! - ZyX7 7/9/2018";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -132,13 +132,13 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1526928414;
+        genesis.nTime = 1531166400;
         genesis.nBits = 0x1e0ffff0;
-        genesis.nNonce = 21561793;
+        genesis.nNonce = 21788172;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x000001e1a5a4257154c65b46fc732bfa637ba7a898525373ba32ec4aa79921dd"));
-        assert(genesis.hashMerkleRoot == uint256("0xd611ad6808864e0e9bd331f3ffa2298c9e13a54d9fe59a99ccb3a75db374b7c9"));
+        assert(hashGenesisBlock == uint256("0x000004365467dc5d9ca6a1bf8fa6af073556bd2187b617fbbffde001aec1c151"));
+        assert(genesis.hashMerkleRoot == uint256("0xa653d89a4a15cb8a18b92732c1fdf21a923b7347700b46e23153eba71094bbf1"));
 
         // DNS Seeding
         //vSeeds.push_back(CDNSSeedData("", ""));
