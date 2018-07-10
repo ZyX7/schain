@@ -93,7 +93,7 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0xd4;
+        pchMessageStart[0] = 0xd2;
         pchMessageStart[1] = 0xb1;
         pchMessageStart[2] = 0xd3;
         pchMessageStart[3] = 0xa2;
@@ -117,11 +117,11 @@ public:
         nModifierUpdateBlock = 1; // we use the version 2 for SCHAIN
 
         /*
-         node genesis.js -a quark -t 1531166400 -z "Schain is on LIVE! The blockchain of future is here to stay! - ZyX7 & SchainDEV 07/09/2018" -v 0 -n 21561600 -p "04f5a8143f86ad8ac63791fbbdb8e0b91a8da88c8c693a95f6c2c13c063ea790f7960b8025a9047a7bc671d5cfe707a2dd2e13b86182e1064a0eea7bf863636363"
+         node genesis.js -a quark -t 1531166400 -z "Schain is on LIVE! The blockchain of future is here to stay! - ZyX7 & SchainDEV 07/10/2018" -v 0 -n 21561600 -p "04f5a8143f86ad8ac63791fbbdb8e0b91a8da88c8c693a95f6c2c13c063ea790f7960b8025a9047a7bc671d5cfe707a2dd2e13b86182e1064a0eea7bf863636363"
 
          */
 
-        const char* pszTimestamp = "Schain is on LIVE! The blockchain of future is here to stay! - ZyX7 & SchainDEV 07/09/2018";
+        const char* pszTimestamp = "Schain is on LIVE! The blockchain of future is here to stay! - ZyX7 & SchainDEV 07/10/2018";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -134,11 +134,11 @@ public:
         genesis.nVersion = 1;
         genesis.nTime = 1531166400;
         genesis.nBits = 0x1e0ffff0;
-        genesis.nNonce = 22007242;
+        genesis.nNonce = 22455128;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x00000f5da3da8b4a3aeda444a0ef3004c4d795703f237afa9feaf4868492e9e4"));
-        assert(genesis.hashMerkleRoot == uint256("0x4d9a4b64884dd10331d27ae8ae9104ba1fe0fc421bfd8932b2885e6a1886aef4"));
+        assert(hashGenesisBlock == uint256("0x00000690f29f5043ea7796892777f50b80f8e4af0c8a0fd6c272fefb261eea5e"));
+        assert(genesis.hashMerkleRoot == uint256("0x15bfe325c122a8adaec88714ca3d7f53bd88c9008c82a73cfb64926cfb121de9"));
 
         // DNS Seeding
         //vSeeds.push_back(CDNSSeedData("", ""));
