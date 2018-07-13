@@ -27,7 +27,7 @@
 
 #### Block 900,001-1,500,000  -  *0.250 SCH*
 
-#### Block 1,500,001-6,000,000   -   *0.125 SCH*
+#### Block 1,500,001-11,754,053   -   *0.125 SCH*
 
 #### *11 year tapering inflation reward, with a cumulative supply capped at 2,500,000 SChain.*
 
